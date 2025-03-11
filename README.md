@@ -31,9 +31,10 @@
 3. **Homoscedasticity**
    - The variance of residuals (errors) should be constant across all values of X.
    - Why is it important?
-     - If violated, it could lead to biased standard errors → wrong conclusions in hypothesis testing.
+     - If violated, it could lead to biased standard errors → wrong conclusions in hypothesis testing and confidence interval.
    - How to check:
      - Residual plots (should show no clear pattern).
+   - Solution: Use log transformation or Weighted Least Squares (WLS
 
 4. **Normality of Residuals**
    - The residuals should be normally distributed.
@@ -68,6 +69,62 @@
 - **Adjusted R-squared:** Adjusts R² for the number of predictors.
 - **Root Mean Squared Error (RMSE):** Measures model accuracy by penalizing large errors more than MAE.
 
+### Why does Linear Regression minimize the sum of squared errors (SSE) instead of absolute errors?
+1. Amplifies effect of larger error
+2. Squared errors are differentiable, making optimization easier
+3. Single global minimum, absolute errors create multiple local minima
+
+### Why is Linear Regression sensitive to outliers? How do you handle them?
+- OLS squares the error, leading to high penalization of large errors
+- How to Detect Outliers?
+  - Boxplots & Scatter plots: Identify extreme values.
+  - Z-score Method: If ∣Z∣>3, it’s an outlier.
+- Ways to Handle Outliers
+  - Remove extreme outliers if they are data entry errors.
+  - Transform variables (logarithm or square root).
+
+### What is 𝑅2, and why does adding more variables always increase its value?
+- measures how well independent variables explain the variance in
+- Adding variables always increases or keeps it constant because residuals shrink.
+
+### What happens if the matrix 𝑋𝑇 X is not invertible?
+- Multicollinearity: Strong correlation among predictors.
+- Too many features relative to observations.
+
+### What are the optimization Algorithm for Linear Regression?
+- OLS : It minimises sum of squared error,
+   - it find reression coefficient using normal equation
+     \[
+\hat{\beta} = (X^T X)^{-1} X^T Y
+\]
+   - Used when small dataset, Fast and gives exact solutions.
+- Gradient Descent:
+   - It iteratively updates the regression coefficients by minimizing the cost function.
+   - It uses the partial derivative of the cost function to adjust the weights step by step
+   - Cost Function (Mean Squared Error - MSE)
+   - \[J(\beta) = \frac{1}{2m} \sum_{i=1}^{m} (Y_i - \hat{Y}_i)^2\]
+
+Where:
+- **J(β)** = Cost function (Mean Squared Error)
+- **m** = Number of samples
+- **Yᵢ** = Actual values
+- **Ŷᵢ** = Predicted values
+
+#### Gradient Descent formula
+\beta_j = \beta_j - \alpha \frac{\partial J}{\partial \beta_j}
+\]
+
+Where:
+- **βⱼ** = Parameter to be updated
+- **α** = Learning rate (step size)
+- **J** = Cost function
+
+This equation helps in iteratively updating **βⱼ** to minimize the cost function **J**.
+
+### What are the different types of Gradient Descent?
+- Batch GD- It takes entire data and updates the parameters.Converges smoothly but is slow for large datasets.
+- Stochastic GD- Updates coefficients using one data point at a time.Faster but has high variance
+- Mini Batch GD- Updates coefficients using small batch of data point at a time.Balances speed and stability.
 ---
 
 ## Logistic Regression
