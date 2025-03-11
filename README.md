@@ -209,8 +209,19 @@ Ordinal Encoding for ordered categories.
 
 ---
 ## SVM
+It can handle high dimensional data and create decision boundaries that separate data points of different classes
+- Hyperplane : SVM finds the best hyperplane that separates the data points of different classes
+- Maximizes the margin: It maximizes the margin between the closest data points from both classes
+- Kernel: If the data is not linearly separable: SVM uses kernal function to transform the data into higher dimensional space where it becomes separable
+Popular kernals include
+Linear kernel
+Polynomial kernel
+RBF kernel
+Sigmoid kernel
+
 ---
-## K-nearest neighbours
+## K-nearest neighbours 
+
 ---
 ## K-means
 ---
