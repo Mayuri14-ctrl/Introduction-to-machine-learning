@@ -182,31 +182,17 @@ Newton’s Method (used in some cases for faster convergence)
 - L2 (Ridge) → Shrinks coefficients but does not make them zero.
 
 ## Performance Evaluation & Metrics
-1️⃣8️⃣ What metrics do we use to evaluate a logistic regression model?
-✅ Accuracy → 
-Correct Predictions
-Total Predictions
-Total Predictions
-Correct Predictions
-
-✅ Precision → 
-TP
-TP + FP
-TP + FP
-TP
-​
-✅ Recall → 
-TP
-TP + FN
-TP + FN
-TP
-​
-✅ F1-score → Harmonic mean of precision and recall
-✅ AUC-ROC → Measures how well the model separates classes.
+### What metrics do we use to evaluate a logistic regression model? 
+- Accuracy → Correct Predictions / Total Predictions
+- Precision →  TP /TP + FP
+​- Recall →  TP/ TP + FN
+​- F1-score → Harmonic mean of precision and recall
+- AUC-ROC → Measures how well the model separates classes.
 
 ### What is the ROC curve, and how do we interpret it?
-The ROC curve plots True Positive Rate (TPR) vs. False Positive Rate (FPR).
+The ROC curve plots True Positive Rate (TPR) (Recall) vs. False Positive Rate (FPR).
 A higher AUC (closer to 1) means a better model.
+
 ### How do we choose the right threshold for classification?
 Default: 0.5, but it depends on the problem.
 Use Precision-Recall tradeoff to find the best threshold.
@@ -214,33 +200,23 @@ Use Precision-Recall tradeoff to find the best threshold.
 ### How does logistic regression handle categorical variables?
 One-Hot Encoding for nominal variables.
 Ordinal Encoding for ordered categories.
+
 ### You trained a logistic regression model, but it has low accuracy. What would you do?
-✅ Check for missing values.
-✅ Try feature engineering.
-✅ Tune regularization strength.
-✅ Handle class imbalance.
-
-
----
-
-
-### How to Contribute
-- Fork this repository.
-- Create a new branch (`git checkout -b feature-branch`).
-- Commit your changes (`git commit -m "Added explanation on assumptions"`).
-- Push to the branch (`git push origin feature-branch`).
-- Open a pull request!
+- Check for missing values.
+- Try feature engineering.
+- Tune regularization strength.
+- Handle class imbalance.
 
 ---
-
-### License
-This project is licensed under the MIT License.
-
-
-
-### SVM
-### K-nearest neighbours
-### K-means
-### Decision tree
-### Bagging
-### Boosting
+## SVM
+---
+## K-nearest neighbours
+---
+## K-means
+---
+## Decision tree
+---
+## Bagging
+---
+## Boosting
+---
