@@ -220,7 +220,15 @@ Best Encoding Approach:
 One-Hot Encoding is preferred, creating binary columns:
 
 ### Min-Max Scaling vs. Standardization (Z-score Normalization)
+Min-Max Scaling: X-Xmin/(Xmax-Xmin) when data is not normalizaed and range is known, not good when outliers
+Standarization: X-mean/SD, when data follows normal distribtuion or has outliers
 
+from sklearn.preprocessing import MinMaxScalar, StandardScalar
+import numpy as np
+scalar=MinMaxScalar()
+noramlized_data=scalar.fit_transform(data)
+scalar=StandardScalar()
+standarized_data=scalar.fit_transform(data)
 
 ---
 ## SVM
