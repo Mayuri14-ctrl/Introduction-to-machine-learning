@@ -208,6 +208,21 @@ Ordinal Encoding for ordered categories.
 - Handle class imbalance.
 
 ---
+## Feature Engineering
+### what is ordinal vs nominal data?
+Ordinal Data (Ordered Categories)
+The categories follow a logical order.
+Best Encoding Approach:
+Label Encoding (Ordinal Encoding) is used since order matters.
+Nominal Data (Unordered Categories)
+The categories do not have a meaningful order.
+Best Encoding Approach:
+One-Hot Encoding is preferred, creating binary columns:
+
+### Min-Max Scaling vs. Standardization (Z-score Normalization)
+
+
+---
 ## SVM
 It can handle high dimensional data and create decision boundaries that separate data points of different classes
 - Hyperplane : SVM finds the best hyperplane that separates the data points of different classes
@@ -221,6 +236,60 @@ Sigmoid kernel
 
 ---
 ## K-nearest neighbours 
+It is non parametric and instance based ,meaning no assumption of data distribution and stores all the training data instead of building explicit model
+- no traning phase
+- choosing right k is crucial (k too low - overfitting, k too high underfitting
+- Decide no of k, for any new data point, find nearest k neighbours based on the smallest distance(Euclidean distance),Assign the mejority class label
+- Computationally heavy
+- Curse of Dimensionality
+- Imbalanced data
+
+### How does the choice of k affect the bias-variance tradeoff in KNN? 
+A small (k=1) results in high variance and low bias (overfitting). The model fits noise and memorizes training data.
+A large (k=n) results in high bias and low variance (underfitting). The model becomes too simplistic, ignoring complex patterns.
+Best practice: Choose k using cross-validation or elbow method (finding the optimal tradeoff).
+
+### How does feature scaling affect KNN?
+Answer:
+Problem: KNN relies on distance calculations (e.g., Euclidean distance). If features have different scales (e.g., age in years vs income in lakhs), higher-magnitude features dominate distance calculations.
+Solution:
+Min-Max Scaling: Normalizes data to [0,1].
+Standardization (Z-score normalization): Converts data to have mean 0 and variance 1
+Use Manhattan or Cosine Distance instead of Euclidean if feature magnitudes vary widely.
+
+### What is the time complexity of KNN? How can it be improved?
+Brute Force KNN (Naïve implementation):
+Training time: O(1) (since no training is needed).
+Prediction time: O(n⋅d), where n is the number of points and 
+d is the number of dimensions.
+
+Optimizations:
+KD-Tree: Reduces search time to O(logn), but works best for 𝑑<30
+Ball Tree: Performs better for high-dimensional data.
+Approximate Nearest Neighbors (ANN): Uses hashing or clustering to reduce search space.
+
+### What are the different distance metrics in KNN? When should each be used
+Euclidean Distance:  Best for continuous numerical data with similar scales.
+Manhattan Distance: Works well when movement is restricted to grid-like paths (e.g., city block distances).
+Minkowski Distance: Generalized form of Euclidean and Manhattan:
+Cosine Similarity: Measures the cosine of the angle between two vectors.Useful for text analysis (TF-IDF vectors) or high-dimensional sparse data.
+Hamming Distance: Measures dissimilarity in categorical data.Used for binary or categorical features.
+
+### How do you handle categorical variables in KNN?
+Convert categories into numerical values using techniques like:
+One-hot encoding
+Label encoding
+Use appropriate distance metrics:
+Hamming Distance for binary variables
+Gower Distance for mixed categorical and numerical data
+Weighted Voting: Assign higher weights to neighbors that are more similar in categorical features
+
+### Can KNN be used for probability estimation? If yes, how?
+Relative Frequency Approach:
+P(y = c | x) = \frac{\text{count of class } c \text{ in k-neighbors}}{k} ]
+Weighted KNN: Assign higher weights to closer neighbors using inverse distance weighting:
+w_i = \frac{1}{d(x, x_i) + \epsilon} ]
+Probability is then calculated as a weighted sum of class occurrences.
 
 ---
 ## K-means
