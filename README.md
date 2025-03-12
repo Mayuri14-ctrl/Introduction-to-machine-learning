@@ -301,10 +301,119 @@ Probability is then calculated as a weighted sum of class occurrences.
 
 ---
 ## K-means
+It is used to group data point into k clusters based on similarity
+How K-Means Works?
+Choose K (number of clusters).
+Initialize K centroids randomly.
+Assign each data point to the nearest centroid (forming clusters).
+Recalculate centroids as the mean of all points in a cluster.
+Repeat steps 3 & 4 until centroids stop changing (convergence)
+
+### Why is K-Means sensitive to the initial choice of centroids? How can you fix it?
+K-Means can converge to a local minimum based on the initial centroid selection. If the centroids are poorly initialized, it may lead to suboptimal clustering.
+Fix:
+Use K-Means++ for smart centroid initialization.
+Run K-Means multiple times with different initializations and select the best model (lowest inertia).
+
+### How do you determine the optimal number of clusters (K)?
+Elbow Method (WCSS - Within-Cluster Sum of Squares)
+Silhouette Score (Measures how well a point fits in its cluster)
+Gap Statistic (Compares clustering performance against random data)
+
+### What are the limitations of K-Means? When should you NOT use it?
+Sensitive to outliers (since it uses mean-based centroids).
+Fails on non-spherical clusters (e.g., crescent moon or concentric circles).
+Needs K to be pre-defined, which might not always be known.
+When NOT to Use K-Means?
+If the dataset has overlapping clusters with non-linear boundaries, consider DBSCAN or Gaussian Mixture Models (GMMs) instead.
+
+### How do you handle categorical variables in K-Means?
+K-Means is based on Euclidean distance, which does not work well with categorical data.
+
+Convert categorical variables using One-Hot Encoding + PCA for dimensionality reduction.
+Use K-Modes Clustering (designed for categorical data).
+If data contains categorical features, use K-Modes instead.
+
+### How do you handle an imbalanced dataset in K-Means?
+Use Weighted K-Means, which assigns different importance to points based on density.
+Consider Density-Based Clustering (DBSCAN) if clusters have very different densities.
+
+### How does K-Means compare to hierarchical clustering and DBSCAN?
+
+### Types of Hierarchical Clustering
+Agglomerative (Bottom-Up Approach)
+Each data point starts as its own cluster.
+Merge the closest clusters iteratively until only one cluster remains.
+This is the most commonly used method.
+
+Divisive (Top-Down Approach)
+Start with one big cluster containing all data points.
+Recursively split the clusters into smaller groups.
+Less commonly used due to higher computational cost.
+
 ---
 ## Decision tree
+Chooses the best possible feature to split the data, repeat the process for each subnet
+For Classification Trees:
+Gini Index: Measures impurity. Lower values mean purer nodes.ini=1−∑(pi​)^2
+Entropy (Information Gain): Measures randomness in data. Entropy=−∑pi​log2​(pi​)
+
+For Regression
+Mean Squared Error (MSE) - Most Common
+The feature that results in the lowest MSE after splitting is chosen.
+The lower the MSE, the better the split.
+
+Chi-Square: Checks statistical significance of splits.
 ---
 ## Bagging
+### Why does Bagging reduce variance but not bias?
+Bagging works by training multiple independent models on random subsets of data.
+Since models are trained separately, they reduce variance (i.e., prevent overfitting to a single dataset).
+But each model still has the same bias, meaning if an individual model is underfitting, averaging them won't reduce bias.
+
 ---
 ## Boosting
+### How does Boosting reduce bias but not variance?
+Boosting builds models sequentially, where each new model corrects errors of the previous one.
+This reduces bias since weak learners are forced to focus on difficult cases.
+However, Boosting doesn’t reduce variance much because it relies heavily on previous weak learners (making models more dependent).
+
+### Ways to prevent overfitting:
+Use early stopping (stop adding trees when validation error increases).
+Limit the learning rate (shrink contribution of each weak learner).
+Use regularization techniques (L1/L2 regularization in XGBoost).
+
+### Why does AdaBoost fail when data contains outliers?
+AdaBoost assigns higher weights to misclassified points.
+If there are outliers, the model keeps trying to correct them, leading to overfitting.
+Solution: Use Robust Boosting techniques like Huber loss or tweak the learning rate.
+
+### In Gradient Boosting, why do we fit a model to the residuals instead of the original target?
+Gradient Boosting minimizes loss function gradients step by step.
+Instead of predicting the target directly, it predicts the error (residuals) of previous models.
+This ensures each new model corrects errors from the last iteration, improving accuracy.
+
+###  What is the role of the learning rate in Boosting algorithms?
+The learning rate (η) controls how much each weak learner contributes to the final model.
+Lower learning rate = More trees needed, but generalizes better.
+Higher learning rate = Faster training, but risks overfitting.
+
+### Your model has high bias. Should you use Bagging or Boosting?
+Boosting is better for high bias because it focuses on hard-to-learn cases.
+Bagging works better for high variance but won’t improve a high-bias model.
+
+### If you have highly correlated features, will Boosting or Bagging work better?
+Bagging (e.g., Random Forest) works better because it selects random feature subsets, reducing correlation effects.
+Boosting (e.g., XGBoost) may overfit because it relies on all features iteratively.
+Solution: Use feature selection (L1 regularization, PCA, or correlation thresholding).
+
+
+### Why does XGBoost outperform traditional Gradient Boosting?
+Uses second-order Taylor expansion for better gradient optimization.
+Implements regularization (L1 & L2) to prevent overfitting.
+Uses histogram-based splits to speed up training.
+Supports parallel processing unlike traditional GBM.
+
+### Different Methods of Hyperparameter Tuning
+
 ---
